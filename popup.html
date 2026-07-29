@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<style>
+  body {
+    width: 260px;
+    margin: 0;
+    padding: 16px;
+    font-family: -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+    color: #202124;
+  }
+  h3 { margin: 0 0 12px; font-size: 15px; }
+  button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #4285f4;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  button:hover { background: #3367d6; }
+  .checkbox-field {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #5f6368;
+  }
+</style>
+</head>
+<body>
+  <h3>방문기록 날짜별 삭제</h3>
+  <button id="openBtn">관리 화면 열기</button>
+  <div class="checkbox-field">
+    <input type="checkbox" id="backupToggle" checked>
+    <label for="backupToggle">삭제 전 백업 파일(JSON) 다운로드</label>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
