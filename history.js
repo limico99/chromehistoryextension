@@ -441,6 +441,10 @@ document.getElementById('reloadBtn').addEventListener('click', () => {
   loadAll(currentDays);
 });
 
+document.getElementById('scheduleBtn').addEventListener('click', () => {
+  window.location.href = 'scheduler.html';
+});
+
 // ---------------------------------------------------------------------------
 // 초기화
 // ---------------------------------------------------------------------------

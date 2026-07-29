@@ -1,9 +1,12 @@
 {
   "manifest_version": 3,
   "name": "방문기록 날짜별 선택 삭제",
-  "version": "1.0.0",
-  "description": "크롬 방문기록을 날짜별로 확인하고, 원하는 항목만 골라서 삭제하는 확장 프로그램",
-  "permissions": ["history", "storage"],
+  "version": "1.1.0",
+  "description": "크롬 방문기록을 날짜별로 확인하고, 원하는 항목만 골라서 삭제하는 확장 프로그램 (예약 자동 정리 지원)",
+  "permissions": ["history", "storage", "alarms", "downloads"],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "popup.html",
     "default_title": "방문기록 관리",

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>예약 삭제 관리</title>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --border: #e2e4e8;
+    --accent: #4285f4;
+    --danger: #d93025;
+    --text: #202124;
+    --muted: #5f6368;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", "Malgun Gothic", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+  }
+  header {
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  header h1 { margin: 0; font-size: 17px; margin-right: auto; }
+  main {
+    max-width: 720px;
+    margin: 24px auto;
+    padding: 0 24px 40px;
+  }
+  section {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  section h2 { margin: 0 0 14px; font-size: 15px; }
+  .form-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .form-row label { font-size: 13px; color: var(--muted); min-width: 90px; }
+  select, input[type="date"], input[type="time"], input[type="number"] {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 13px;
+  }
+  input[type="number"] { width: 80px; }
+  .checkbox-field { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+  button {
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  #addBtn { background: var(--accent); color: white; }
+  #backBtn { background: #eef1f5; color: var(--text); }
+  .rule-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .rule-row { display: flex; align-items: flex-start; gap: 12px; }
+  .rule-info { flex: 1; }
+  .rule-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+  .rule-sub { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+  .rule-meta { font-size: 12px; color: var(--muted); }
+  .rule-actions { display: flex; gap: 6px; flex-shrink: 0; }
+  .run-now { background: #eef1f5; color: var(--text); }
+  .remove-rule { background: var(--danger); color: white; }
+  .empty { color: var(--muted); padding: 24px; text-align: center; }
+  #status { margin-top: 10px; font-size: 13px; }
+  #status.ok { color: #188038; }
+  #status.err { color: var(--danger); }
+</style>
+</head>
+<body>
+<header>
+  <h1>예약 삭제 관리</h1>
+  <button id="backBtn">방문기록 관리로 돌아가기</button>
+</header>
+<main>
+  <section>
+    <h2>새 예약 추가</h2>
+    <form id="ruleForm">
+      <div class="form-row">
+        <label>반복</label>
+        <select id="freqSelect">
+          <option value="daily">매일</option>
+          <option value="weekly">매주</option>
+          <option value="once">한 번만</option>
+        </select>
+        <select id="weekdaySelect" style="display:none;">
+          <option value="0">일요일</option>
+          <option value="1">월요일</option>
+          <option value="2">화요일</option>
+          <option value="3">수요일</option>
+          <option value="4">목요일</option>
+          <option value="5">금요일</option>
+          <option value="6">토요일</option>
+        </select>
+        <input type="date" id="onceDate" style="display:none;">
+        <input type="time" id="timeInput" value="03:00">
+      </div>
+      <div class="form-row">
+        <label>정리 대상</label>
+        <span>최근</span>
+        <input type="number" id="retentionDays" min="1" value="30">
+        <span>일은 남기고 그 이전 기록 삭제</span>
+      </div>
+      <div class="form-row">
+        <label></label>
+        <div class="checkbox-field">
+          <input type="checkbox" id="deleteAllToggle">
+          <label for="deleteAllToggle" style="min-width:auto;">대신 전체 방문기록을 삭제</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <label></label>
+        <div class="checkbox-field">
+          <input type="checkbox" id="ruleBackupToggle" checked>
+          <label for="ruleBackupToggle" style="min-width:auto;">실행 전 백업 파일(JSON) 다운로드</label>
+        </div>
+      </div>
+      <button type="submit" id="addBtn">예약 추가</button>
+    </form>
+    <div id="status"></div>
+  </section>
+
+  <section>
+    <h2>등록된 예약</h2>
+    <div id="ruleList"><div class="empty">불러오는 중...</div></div>
+  </section>
+</main>
+<script src="scheduler.js"></script>
+</body>
+</html>
